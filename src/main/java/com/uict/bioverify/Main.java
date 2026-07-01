@@ -51,6 +51,8 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            System.setProperty("jna.library.path", "dlls");
+            logger.info("Set jna.library.path to: " + System.getProperty("jna.library.path"));
             logger.info("Bootstrapping BioVerify Standalone Application...");
 
             // Register Jackson time module for local date/time serialization

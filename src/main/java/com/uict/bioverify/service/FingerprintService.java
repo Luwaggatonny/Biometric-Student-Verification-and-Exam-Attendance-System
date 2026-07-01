@@ -25,6 +25,7 @@ import com.neurotec.biometrics.NBiometricStatus;
 import com.neurotec.biometrics.NSubject;
 import com.neurotec.io.NBuffer;
 import com.neurotec.biometrics.NMatchingSpeed;
+import com.neurotec.biometrics.NFinger;
 
 public class FingerprintService {
 
@@ -167,6 +168,7 @@ public class FingerprintService {
                 NSubject referenceSubject = null;
                 try {
                     referenceSubject = NSubject.fromMemory(NBuffer.fromArray(enrolledTemplate));
+
                     NBiometricStatus status = client.verify(candidateSubject, referenceSubject);
                     logger.info("Biometric verification status for position {}: {}", fp.getFingerPosition(), status);
                     if (status == NBiometricStatus.OK) {
@@ -221,6 +223,7 @@ public class FingerprintService {
                 NSubject referenceSubject = null;
                 try {
                     referenceSubject = NSubject.fromMemory(NBuffer.fromArray(enrolledTemplate));
+
                     NBiometricStatus status = client.verify(candidateSubject, referenceSubject);
                     if (status == NBiometricStatus.OK) {
                         int score = candidateSubject.getMatchingResults().get(0).getScore();

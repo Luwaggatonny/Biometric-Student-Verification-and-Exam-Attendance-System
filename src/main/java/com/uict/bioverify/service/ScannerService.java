@@ -120,6 +120,7 @@ public class ScannerService {
             // 3. Connect to Device Manager
             deviceManager = biometricClient.getDeviceManager();
             deviceManager.setDeviceTypes(EnumSet.of(NDeviceType.FINGER_SCANNER));
+
             deviceManager.initialize();
 
             // 4. Initialize Biometric Client

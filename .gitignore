@@ -1,0 +1,27 @@
+# Maven build directory
+target/
+
+# Local Maven wrapper/installation directory
+maven/
+
+# Neurotec database files
+Fingers.ndf
+FingersMatching.ndf
+
+# Exclude all scanner drivers except Mantra MFS500
+FScanners/*
+!FScanners/NdmMantraFinger/
+
+# IDE and Editor settings
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# OS-specific files
+Thumbs.db
+desktop.ini

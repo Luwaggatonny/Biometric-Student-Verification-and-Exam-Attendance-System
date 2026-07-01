@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.uict</groupId>
+    <artifactId>bioverify</artifactId>
+    <version>1.0.0</version>
+    <name>BioVerify</name>
+    <description>Biometric Exam Verification and Attendance System for UICT</description>
+    
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson.version>2.17.0</jackson.version>
+        <exec.mainClass>com.uict.bioverify.Main</exec.mainClass>
+    </properties>
+
+    <dependencies>
+        <!-- Jackson for JSON parsing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
+        <!-- MySQL Connector -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+        
+        <!-- SLF4J and simple logger -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        
+        <!-- Neurotechnology SDK Jars (System Scope) -->
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-core</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-core.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-biometrics.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-biometrics-client</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-biometrics-client.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-devices</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-devices.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-licensing</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-licensing.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-media</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-media.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.neurotec</groupId>
+            <artifactId>neurotec-media-processing</artifactId>
+            <version>12.0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/neurotec-media-processing.jar</systemPath>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Java Native Access (JNA) required by Neurotechnology SDK -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.14.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                    <classpathScope>compile</classpathScope>
+                    <arguments>
+                        <!-- Force JVM to load native DLLs from the dlls directory -->
+                        <argument>-Djava.library.path=dlls</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
